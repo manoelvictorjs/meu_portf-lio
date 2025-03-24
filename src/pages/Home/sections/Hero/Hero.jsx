@@ -14,7 +14,7 @@ backgroudColor :"black"
   
   return (
    <>
-        git stHero
+        git Hero
    </>
    
   )
