@@ -1,18 +1,22 @@
-import { Container, styled, Typography, Button } from "@mui/material";
+import { Box, Container, styled, Typography } from "@mui/material";
 import Avatar from "../../../../assets/imagens/minhafoto.jpeg";
 import Grid2 from "@mui/material/Grid2";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import MailIcon from "@mui/icons-material/Mail";
+import StyledButton from "../../../../components/StyledButton/StyledButton";
 
 const Hero = () => {
-  const SyledHero = styled("div")(() => ({
-    backgroundColor: "black",
+  const SyledHero = styled("div")(({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
     height: "100vh",
+    display: "flex",
+    alignItems: "center",
   }));
 
-  const SyledImg = styled("img")(() => ({
-    width: "100%",
+  const SyledImg = styled("img")(({ theme }) => ({
+    width: "80%",
     borderRadius: "50%",
+    border: `2px solid ${theme.palette.primary.contrastText}`,
   }));
 
   return (
@@ -20,24 +24,41 @@ const Hero = () => {
       <SyledHero>
         <Container maxWidth="lg">
           <Grid2 container spacing={2}>
-            <Grid2 size={{ xs: 12, md: 4 }}>
+            <Grid2 size={{ xs: 12, md: 5 }} textAlign={"center"}>
               <SyledImg src={Avatar} />
             </Grid2>
-            <Grid2 size={{ xs: 12, md: 8 }}>
-              <Typography color="primary" variant="h1" textAlign="center">Manoel Victor</Typography>
-              <Typography color="primary" variant="h2" textAlign="center">Sou Dev Back-End</Typography>
-              <Grid2 container sx={{display:"flex", justifyContent:"center"}}>
-                <Grid2 item xs={12} md={6} >
-                  <Button>
+            <Grid2 size={{ xs: 12, md: 7 }}>
+              <Typography
+                color="primary.contrastText"
+                variant="h1"
+                textAlign="center"
+              >
+                Manoel Victor
+              </Typography>
+              <Typography
+                color="primary.contrastText"
+                variant="h2"
+                textAlign="center"
+              >
+                Sou Dev Back-End
+              </Typography>
+              <Grid2
+                container
+                display="flex"
+                justifyContent="center"
+                spacing={3}
+              >
+                <Grid2 item xs={12} md={6}>
+                  <StyledButton>
                     <CloudDownloadIcon />
-                    Meu currículo
-                  </Button>
+                    <Typography>Meu currículo</Typography>
+                  </StyledButton>
                 </Grid2>
                 <Grid2 item xs={12} md={4}>
-                  <Button>
+                  <StyledButton>
                     <MailIcon />
-                    Entre em contato
-                  </Button>
+                    <Typography>Entre em contato</Typography>
+                  </StyledButton>
                 </Grid2>
               </Grid2>
             </Grid2>
