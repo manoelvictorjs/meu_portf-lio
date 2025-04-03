@@ -6,9 +6,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import StyledButton from "../../../../components/StyledButton/StyledButton";
 import { AnimatedBackground } from "../../../../components/AnimatedBackground/AnimatedBackground";
 import Typewriter from "../../../../components/Typewriter";
-import cv from "../../../../assets/cv/manoel_victor_currículo.pdf"
-
-
+import cv from "../../../../assets/cv/manoel_victor_currículo.pdf";
 
 const Hero = () => {
   const SyledHero = styled("div")(({ theme }) => ({
@@ -33,29 +31,30 @@ const Hero = () => {
     position: "relative",
     zIndex: 1,
   }));
-   const handleDownload = () => {
-    
-          console.log("download")
-          // Create a link element
-          const link = document.createElement('a');
-          link.href = cv
-          link.download = 'manoel_victor_currículo.pdf'; // Set the download attribute to specify the file name
-          // Append the link to the body
-          document.body.appendChild(link);
-          // Trigger the click event
-          link.click();
-          // Remove the link from the body
-          document.body.removeChild(link);
-      };
+  const handleDownload = () => {
+    console.log("download");
+    // Create a link element
+    const link = document.createElement("a");
+    link.href = cv;
+    link.download = "manoel_victor_currículo.pdf"; // Set the download attribute to specify the file name
+    // Append the link to the body
+    document.body.appendChild(link);
+    // Trigger the click event
+    link.click();
+    // Remove the link from the body
+    document.body.removeChild(link);
+  };
 
-      const handleEmail = () => {
-        const emailAddress = 'manoelvictordejesus@outlook.com';
-        const subject = 'Manoel';
-        const body = 'Óla bem-vindo ao meu portfolio';
+  const handleEmail = () => {
+    const emailAddress = "manoelvictordejesus@outlook.com";
+    const subject = "Contato via Portfólio";
+    const body = "Olá Manoel, vi seu portfólio e gostaria de conversar!";
 
-        const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.open(mailtoLink);
-    }
+    const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink);
+  };
 
   return (
     <>
@@ -78,6 +77,7 @@ const Hero = () => {
                 variant="h1"
                 pb={2}
                 textAlign="center"
+                display="flex"
               >
                 Manoel Victor
               </Typography>
@@ -95,13 +95,13 @@ const Hero = () => {
                 spacing={3}
               >
                 <Grid2 item xs={10} md={4}>
-                  <StyledButton onClick={()=> handleDownload ()}>
+                  <StyledButton onClick={() => handleDownload()}>
                     <CloudDownloadIcon />
                     <Typography>Meu currículo</Typography>
                   </StyledButton>
                 </Grid2>
                 <Grid2 item xs={10} md={4}>
-                  <StyledButton onClick={()=> handleEmail()}  >
+                  <StyledButton onClick={() => handleEmail()}>
                     <MailIcon />
                     <Typography>Entre em contato</Typography>
                   </StyledButton>
@@ -109,7 +109,9 @@ const Hero = () => {
               </Grid2>
             </Grid2>
           </Grid2>
+  
         </Container>
+        
       </SyledHero>
     </>
   );
