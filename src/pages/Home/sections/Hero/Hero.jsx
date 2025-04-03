@@ -82,7 +82,7 @@ const Hero = () => {
                 Manoel Victor
               </Typography>
               <Typewriter
-                text="Óla Sou Dev Back-End"
+                text="Olá Sou Dev Back-End"
                 delay={120}
                 variant="h2"
                 color="primary.contrastText"
@@ -109,9 +109,7 @@ const Hero = () => {
               </Grid2>
             </Grid2>
           </Grid2>
-  
         </Container>
-        
       </SyledHero>
     </>
   );
