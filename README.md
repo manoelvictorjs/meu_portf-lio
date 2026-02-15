@@ -116,9 +116,12 @@ RESEND_FROM_EMAIL=Portfolio <onboarding@resend.dev>
 ## Deploy (Vercel)
 
 1. Conecte o repositório à [Vercel](https://vercel.com).
-2. Configure as variáveis de ambiente em **Settings → Environment Variables**.
-3. Deixe o comando de build padrão (`npm run build`).
-4. Opcional: configure domínio em **Settings → Domains**.
+2. **Importante – formulário de contato:** adicione as variáveis em **Settings → Environment Variables**:
+   - `RESEND_API_KEY` – sua chave da Resend
+   - `RESEND_TO_EMAIL` – e-mail que receberá as mensagens
+   - `RESEND_FROM_EMAIL` – ex: `Portfolio <onboarding@resend.dev>`
+3. Faça um **novo deploy** após salvar as variáveis (elas só valem em deploys novos).
+4. Para conferir: acesse `https://seu-site.vercel.app/api/contact` (GET). Se `configured: false`, as variáveis não estão corretas.
 
 ## Scripts
 

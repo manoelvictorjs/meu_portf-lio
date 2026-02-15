@@ -3,6 +3,19 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+/** GET: verifica se o serviço está configurado (para debug no Vercel) */
+export async function GET() {
+  const hasKey = !!process.env.RESEND_API_KEY;
+  const hasToEmail = !!process.env.RESEND_TO_EMAIL;
+  const configured = hasKey && hasToEmail;
+  return NextResponse.json({
+    configured,
+    message: configured
+      ? "Formulário de contato configurado"
+      : "Configure RESEND_API_KEY e RESEND_TO_EMAIL no Vercel (Settings → Environment Variables)",
+  });
+}
+
 /** Validação básica dos campos */
 function validateBody(body: unknown): {
   name: string;
