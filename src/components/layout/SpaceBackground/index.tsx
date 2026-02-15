@@ -3,6 +3,8 @@
 /**
  * SpaceBackground - Fundo espacial animado do portfólio.
  *
+ * Só aparece no modo escuro. No modo claro, fica oculto para evitar conflito visual.
+ *
  * Composto por:
  * - Gradiente vertical (azul escuro → roxo → azul)
  * - Nebulosas sutis (radial gradients)
@@ -14,8 +16,15 @@
 
 import { StarField } from "./StarField";
 import { MeteorField } from "./MeteorField";
+import { useTheme } from "../ThemeProvider";
 
 export function SpaceBackground() {
+  const { theme } = useTheme();
+
+  if (theme !== "dark") {
+    return null;
+  }
+
   return (
     <div
       className="fixed inset-0 -z-20 overflow-hidden"
@@ -23,7 +32,7 @@ export function SpaceBackground() {
     >
       {/* Gradiente de fundo espacial */}
       <div
-        className="absolute inset-0 opacity-90 dark:opacity-100"
+        className="absolute inset-0 opacity-100"
         style={{
           background:
             "linear-gradient(180deg, #020617 0%, #0f172a 25%, #1e1b4b 50%, #0f172a 75%, #020617 100%)",
