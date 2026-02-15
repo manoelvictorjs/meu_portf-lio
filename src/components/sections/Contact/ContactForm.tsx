@@ -27,6 +27,15 @@ import { VIEWPORT_ONCE } from "@/lib/constants/animations";
 
 type FormStatus = "idle" | "sending" | "success" | "error" | "rate-limited";
 
+/** Mensagens amigáveis para erros da API */
+const ERROR_MESSAGES: Record<string, string> = {
+  "Serviço de e-mail não configurado":
+    "Configure RESEND_API_KEY no arquivo .env.local. Veja o README.",
+  "E-mail de destino não configurado":
+    "Configure RESEND_TO_EMAIL no arquivo .env.local.",
+  "Dados inválidos": "Verifique se todos os campos estão preenchidos corretamente.",
+};
+
 /** Classes base para inputs */
 const INPUT_BASE_CLASS =
   "mt-1 w-full rounded-lg border bg-background px-4 py-2 text-foreground transition focus:outline-none focus:ring-2 focus:ring-primary";
@@ -34,6 +43,7 @@ const INPUT_ERROR_CLASS = "border-red-500";
 
 export function ContactForm() {
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const {
     register,
@@ -53,10 +63,12 @@ export function ContactForm() {
   const onSubmit = async (data: ContactFormInput) => {
     if (!canSubmit()) {
       setStatus("rate-limited");
+      setErrorMessage("");
       return;
     }
 
     setStatus("sending");
+    setErrorMessage("");
 
     try {
       const res = await fetch("/api/contact", {
@@ -66,15 +78,20 @@ export function ContactForm() {
       });
 
       const json = await res.json().catch(() => ({}));
+      const apiError = typeof json.error === "string" ? json.error : "";
 
       if (!res.ok) {
-        throw new Error(json.error ?? "Erro ao enviar");
+        const msg = ERROR_MESSAGES[apiError] ?? (apiError || "Erro ao enviar. Tente novamente.");
+        setErrorMessage(msg);
+        setStatus("error");
+        return;
       }
 
       recordSubmission();
       setStatus("success");
       reset();
     } catch {
+      setErrorMessage("Erro de conexão. Verifique sua internet e tente novamente.");
       setStatus("error");
     }
   };
@@ -212,9 +229,20 @@ export function ContactForm() {
         </p>
       )}
       {status === "error" && (
-        <p className="mt-4 text-sm text-red-500" role="alert">
-          Erro ao enviar. Tente novamente ou use o e-mail direto.
-        </p>
+        <div className="mt-4 space-y-1">
+          <p className="text-sm text-red-500" role="alert">
+            {errorMessage}
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Ou envie diretamente para{" "}
+            <a
+              href={`mailto:${SITE.email}`}
+              className="text-primary hover:underline"
+            >
+              {SITE.email}
+            </a>
+          </p>
+        </div>
       )}
       {status === "rate-limited" && (
         <p
