@@ -1,0 +1,130 @@
+/**
+ * Estilos globais do portfólio.
+ *
+ * Conteúdo:
+ * - Variáveis CSS para temas (dark/light)
+ * - Reset básico
+ * - Scroll suave e padding para âncoras
+ * - Animações do fundo espacial (star-twinkle)
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Variáveis de tema (dark - padrão) === */
+:root {
+  --background: #0f0f14;
+  --foreground: #f4f4f5;
+  --card: #18181b;
+  --card-foreground: #f4f4f5;
+  --primary: #a78bfa;
+  --primary-foreground: #ffffff;
+  --accent: #67e8f9;
+  --accent-foreground: #0e7490;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+}
+
+/* === Variáveis de tema (light) === */
+.light {
+  --background: #fafafa;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --accent: #06b6d4;
+  --accent-foreground: #ffffff;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+}
+
+/* === Reset === */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Scroll suave para âncoras; padding-top para compensar header fixo */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* === Body base === */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fundo espacial no tema escuro (override do background) */
+.dark body {
+  background: linear-gradient(180deg, #020617 0%, #0f172a 25%, #1e1b4b 50%, #0f172a 75%, #020617 100%);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* === Acessibilidade: outline visível no foco === */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* === Seleção de texto === */
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* === Animações do fundo espacial === */
+
+/* Cintilação das estrelas */
+@keyframes star-twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Meteoro (usado como fallback; meteoros usam Framer Motion) */
+@keyframes meteor {
+  0% {
+    transform: rotate(-45deg) translateX(0) translateY(0);
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.8));
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: rotate(-45deg) translateX(-600px) translateY(600px);
+    opacity: 0;
+    filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.3));
+  }
+}
+
+.star-twinkle {
+  animation: star-twinkle ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.meteor {
+  animation: meteor 4s ease-out infinite;
+  will-change: transform, opacity;
+}
