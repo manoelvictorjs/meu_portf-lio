@@ -49,7 +49,7 @@ export function HeroAvatar() {
       {/* Badges de tecnologias */}
       <div className="absolute -bottom-1 -right-1 flex gap-2 rounded-full bg-card p-2 shadow-lg">
         <span className="font-mono text-xs font-medium text-primary">Node.js</span>
-        <span className="font-mono text-xs font-medium text-accent">Python</span>
+        <span className="font-mono text-xs font-medium text-accent">TypeScript</span>
       </div>
     </motion.div>
   );

@@ -32,7 +32,7 @@ export function ProjectsSection() {
         <SectionHeader
           id="projects-heading"
           title="Projetos & Experiência"
-          description="Sistemas que construí e trajetória profissional"
+          description="Destaque: RM Ecopeças — e-commerce integrado ao Mercado Livre, com stack completa (Next.js, Node.js, Docker, segurança e testes)."
         />
 
         <div className="mt-14 space-y-12">

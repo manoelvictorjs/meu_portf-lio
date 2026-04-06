@@ -5,7 +5,7 @@
  *
  * Primeira seção visível ao carregar o site.
  * Composição:
- * - HeroAvatar: foto de perfil com badges (Node.js, Python)
+ * - HeroAvatar: foto de perfil com badges (Node.js, TypeScript)
  * - HeroContent: nome, tagline, descrição
  * - HeroActions: botões CV/Contato e links sociais
  *

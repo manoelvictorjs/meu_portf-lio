@@ -43,6 +43,12 @@ export function ProjectCard({ project, isReversed = false }: ProjectCardProps) {
               <span className="font-medium text-foreground">Solução: </span>
               <span className="text-muted-foreground">{project.solution}</span>
             </p>
+            {project.architecture && (
+              <p className="text-sm">
+                <span className="font-medium text-foreground">Arquitetura: </span>
+                <span className="text-muted-foreground">{project.architecture}</span>
+              </p>
+            )}
           </div>
 
           {/* Métricas (se houver) */}
@@ -100,7 +106,7 @@ export function ProjectCard({ project, isReversed = false }: ProjectCardProps) {
                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
               >
                 <ExternalLink className="h-4 w-4" />
-                Demo
+                Ver site
               </a>
             )}
           </div>
